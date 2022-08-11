@@ -5,7 +5,10 @@ const Todo = require("../models/todo");
 exports.getIndex = async (req, res) => {
   try {
     const allTodos = await Todo.find({ IsDeleted: false });
-    const completedItems = await Todo.countDocuments({ Completed: true });
+    const completedItems = await Todo.countDocuments({
+      Completed: true,
+      IsDeleted: false,
+    });
     res.render("index", {
       pageTitle: "کارهای روزمره",
       todos: allTodos,
